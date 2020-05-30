@@ -11,7 +11,7 @@ import SwiftUI
 
 struct CalculatorButtonPad: View {
 //    @Binding var brain: CalculatorBrain
-    var model: CalculatorModel
+//    var model: CalculatorModel
     let pad: [[CalculatorButtonItem]] = [
         [
             .command(.clear), .command(.flip),
@@ -38,7 +38,8 @@ struct CalculatorButtonPad: View {
         VStack(spacing: 8) {
             ForEach(pad, id: \.self) { row in
 //                CalculatorButtonRow(brain: self.$brain, row: row)
-                CalculatorButtonRow(model: self.model, row: row)
+//                CalculatorButtonRow(model: self.model, row: row)
+                CalculatorButtonRow(row: row)
             }
         }
     }
@@ -46,7 +47,8 @@ struct CalculatorButtonPad: View {
 
 struct CalculatorButtonRow: View {
 //    @Binding var brain: CalculatorBrain
-    var model: CalculatorModel
+//    var model: CalculatorModel
+    @EnvironmentObject var model: CalculatorModel
     let row: [CalculatorButtonItem]
     var body: some View {
         HStack() {

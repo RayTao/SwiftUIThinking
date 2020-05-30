@@ -13,7 +13,8 @@ import SwiftUI
 struct ContentView: View {
     let scale: CGFloat = UIScreen.main.bounds.width / 414
 //    @State private var brain: CalculatorBrain = .left("0")
-    @ObservedObject var model = CalculatorModel()
+//    @ObservedObject var model = CalculatorModel()
+    @EnvironmentObject var model: CalculatorModel
     @State private var editingHistory = false
     
     var body: some View {
@@ -35,7 +36,8 @@ struct ContentView: View {
                     minWidth: 0,
                     maxWidth: .infinity,
                     alignment: .trailing)
-            CalculatorButtonPad(model: self.model)
+//            CalculatorButtonPad(model: self.model)
+                CalculatorButtonPad()
                 .padding(.bottom)
         }
 //        .scaleEffect(scale) // 简单除暴适配不同屏幕
@@ -46,8 +48,8 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
 //            ContentView().previewDevice("iPad Air 2")
-            ContentView().previewDevice("iPhone XR")
-            ContentView().environment(\.colorScheme, .dark).previewDevice("iPhone 6s")
+            ContentView().environmentObject(CalculatorModel()).previewDevice("iPhone XR")
+            ContentView().environmentObject(CalculatorModel()).environment(\.colorScheme, .dark).previewDevice("iPhone 6s")
         }
     }
 }
