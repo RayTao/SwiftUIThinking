@@ -33,7 +33,7 @@ class CalculatorModel: ObservableObject {
         }
     }
 
-    func keepHistory(upTo index:Int) {
+    @inline(__always) func keepHistory(upTo index:Int) {
         precondition(index <= totalCount, "Out of index")
         
         let total = history + temporaryKept

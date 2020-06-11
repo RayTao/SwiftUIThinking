@@ -16,7 +16,8 @@ struct ContentView: View {
 //    @ObservedObject var model = CalculatorModel()
     @EnvironmentObject var model: CalculatorModel
     @State private var editingHistory = false
-    
+    @State private var tapNumber = false
+
     var body: some View {
         VStack(spacing: 12) {
 //            Spacer()
@@ -36,8 +37,15 @@ struct ContentView: View {
                     minWidth: 0,
                     maxWidth: .infinity,
                     alignment: .trailing)
+                .onTapGesture {
+                    self.tapNumber = true
+            }.alert(isPresented: $tapNumber) {
+                Alert(title: Text("\(model.historyDetail)"),
+                      message: nil,
+                      dismissButton: .cancel(Text("OK")))
+            }
 //            CalculatorButtonPad(model: self.model)
-                CalculatorButtonPad()
+            CalculatorButtonPad()
                 .padding(.bottom)
         }
 //        .scaleEffect(scale) // 简单除暴适配不同屏幕
@@ -49,7 +57,7 @@ struct ContentView_Previews: PreviewProvider {
         Group {
 //            ContentView().previewDevice("iPad Air 2")
             ContentView().environmentObject(CalculatorModel()).previewDevice("iPhone XR")
-            ContentView().environmentObject(CalculatorModel()).environment(\.colorScheme, .dark).previewDevice("iPhone 6s")
+//            ContentView().environmentObject(CalculatorModel()).environment(\.colorScheme, .dark).previewDevice("iPhone 6s")
         }
     }
 }
